@@ -1,0 +1,83 @@
+h2{
+    font-size: 40px;
+    width: 70%;
+    margin-left: 80px;
+    font-weight: 1000;
+}
+h5 {
+    color: black;
+    font-weight: 550;
+    margin-left: 30%;
+}
+.latest__updates {
+    display: block;
+    margin-left: 80px;
+    margin-bottom: -20px;
+    border: 1px solid black;
+    width: 95%;
+    height: 25px;
+}
+.latest {
+    background-color: aqua;
+    height: 80px;
+    border-right: 1px solid black;
+}
+.update {
+    color: red;
+    position: absolute;
+    margin-bottom: 60px;
+}
+.buttons {
+    margin-top: 50px;
+}
+.buttons h4 {
+    margin-top: 20px;
+    margin-left: 80px;
+    font-size: 20px;
+}
+
+/* .student__btn {
+    bor
+} */
+.buttons .btn{
+    margin-left: 80px;
+    padding: 10px;
+    text-align: center;
+    height: 50px;
+    background-color: #000048;
+    width: 150px;
+    border: none;
+    border-radius: 10px;
+    color: #E2FEF9;
+    font-weight: bold;
+    box-shadow: none;
+    font-size: 17px;
+    text-transform: none;
+    z-index: 1;
+    cursor: pointer;
+}
+.buttons .btn:hover {
+    background-color: #000048;
+    box-shadow: none;
+}
+
+.banner {
+    /* background-image: url("C:\Users\2263730\Downloads\ChinniProject-main\ChinniProject-main\public\images\payfees.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left right; */
+    height: 500px;
+    background: rgb(55, 182, 246);
+    display: flex;
+    align-items: center;
+    margin-bottom: -100px;
+}
+.banner__left {
+    padding-top: 90px;
+}
+.banner__right img{
+    height: 300px;
+    width: 550px;
+    margin-right: 100px;
+    /* margin-bottom: 200px; */
+}

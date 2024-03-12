@@ -1,0 +1,101 @@
+.footer {
+    margin-top: 100px;
+    height: 300px;
+    width: 100%;
+    background-color: #E9F2FE;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.footer .footer__contents {
+    display: flex;
+    /* justify-content: space-between; */
+    position: relative;
+    margin-top: 50px;
+}
+.footer__contents .footer__content-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 100px;
+    margin-top: 40px;
+    width: 800px;
+}
+.footer__contents .footer__content-left .logo {
+    width: 250px;
+    object-fit: contain;
+}
+.footer__cotent-left__options {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+.footer__cotent-left__options a {
+    text-decoration: none;
+    color: black;
+    margin: 10px;
+}
+.footer__cotent-left__options .footer__cotent-left__option {
+    /* padding: 20px; */
+    /* margin: 50px; */
+    display: flex;
+    flex-direction: column;
+}
+.footer__cotent-left__options .footer__cotent-left__option1 {
+    margin-left: 100px;
+    /* margin: 20px; */
+    display: flex;
+    flex-direction: column;
+}
+.footer__cotent-left__options .footer__cotent-left__option2 {
+     margin-left: 100px;
+    /* margin: 20px; */
+    display: flex;
+    flex-direction: column;
+}
+
+.footer__content-middle {
+    margin-left: 150px;
+    margin-top: 40px;
+}
+.footer__content-middle a {
+    text-decoration: none;
+    color: black;
+}
+.footer__content-middle .top__insurances {
+    margin-top: 20px;
+    /* margin: 10px; */
+    display: flex;
+    flex-direction: column;
+}
+.footer__content-middle .top__insurances:nth-child(1) {
+    margin-top: 50px;
+}
+.footer__content-middle h2 {
+    margin-left: -10px;
+    font-weight: 700;
+    font-size: 20px;
+}
+.footer__content-right {
+    margin-left: 50px;
+    margin-top: 40px;
+}
+.footer__content-right h2 {
+    margin-left: -10px;
+    font-weight: 700;
+    font-size: 16px;
+}
+.footer__icons .facebook{
+    margin: 3px;
+    color: blue;
+}
+.footer__icons .instagram{
+    margin: 3px;
+    color: red;
+}
+.footer__icons .linkdin{
+    margin: 3px;
+    color: rgb(125, 125, 220);
+}
+.footer__icons .twitter{
+    margin: 3px;
+    color: skyblue;
+}

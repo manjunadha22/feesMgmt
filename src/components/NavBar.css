@@ -1,0 +1,104 @@
+ .header {
+    z-index: 1;
+    padding: 15px 5%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    background-color: white;
+    /* z-index: 100; */
+    top: 0;
+    align-items: center;
+    box-shadow: 0px 5px 6px -9px rgba(0,0,0,0.75);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header > img {
+    width: 30%;
+    margin-left: 60px;
+    object-fit: contain;
+}
+
+.header__middle {
+    margin: 5px;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+.header__option > a {
+    text-decoration: none;
+    color: #000048;
+    margin: 25px;
+    font-weight: 500;
+}
+.header__option__with__icon > a {
+    text-decoration: none;
+    color: #000048;
+    /* margin: 10px; */
+    font-weight: 500;
+}
+.header__option__with__icon {
+    margin-top: -3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__right {
+    margin-right: 30px;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+.header__right .MuiSvgIcon-root {
+    padding: 8px;
+    font-size: 40px;
+}
+.circle {
+    position: absolute;
+    margin-left: 58px;
+    margin-bottom: 13px;
+    height: 11px;
+    width: 11px;
+    background-color: red;
+    border-radius: 50%;
+    font-size: 5px;
+}
+.btn {
+    padding: 10px;
+    margin-left: 15px;
+    text-align: center;
+    height: 25px;
+    background-color: #E9F2FE;
+    width: 80px;
+    border: none;
+    border-radius: 20px;
+    color: #000048;
+    font-weight: bold;
+    box-shadow: none;
+    font-size: 12px;
+    text-transform: none;
+}
+.header__right .btn > span {
+    margin-bottom: -20px;
+}
+.btn:hover {
+    background-color: #000048;
+    color: white;
+}
+
+.header__right #plans {
+    margin-left: 15px;
+    border: none;
+    height: 25px;
+    width: 120px;
+    color: #000048;
+    font-weight: bold;
+    background-color: #E9F2FE;
+    border-radius: 20px;
+    font-size: 12px;
+    text-align: center;
+}
+.header__right #plans:focus {
+    outline: none;
+}
