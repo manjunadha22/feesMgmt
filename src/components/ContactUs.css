@@ -1,0 +1,37 @@
+.hey .contact_content {
+    margin-top: 50px;
+}
+.hey .contact_content h2 {
+    margin-bottom: 30px;
+    margin-left: 60px;
+}
+.hey .contact_content .address {
+    display: flex;
+    margin-left: 60px;
+    align-items: center;
+}
+.hey .contact_content .address span{
+    color: green;
+}
+
+.hey .contact_content .address h4 {
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: 15px;
+}
+.hey .contact_content button {
+    border: none;
+    background-color: rgb(225, 194, 21);
+    height: 40px;
+    width: 150px;
+    border-radius: 20px;
+    margin-left: 385px;
+}
+.hey .contact_content button a {
+    text-decoration: none;
+    color: black;
+}
+.footer__icons {
+    margin-top: 50px;
+    margin-left: 60px;
+}

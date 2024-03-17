@@ -1,0 +1,79 @@
+.main__ui {
+    display: flex;
+}
+
+.btns {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+}
+.btns .active{
+    background-color: orange;
+}
+.btns button {
+    width: 300px;
+    margin-top: 5px;
+    border: none;
+    height: 40px;
+}
+.btns button:hover {
+    background-color: orange;
+}
+
+p{
+    color: black;
+}
+
+.main__ui .respective h2 {
+    font-size: 25px;
+    margin-top: 30px;
+}
+.main__ui .respective img {
+    height: 300px;
+    width: 800px;
+    object-fit: contain;
+}
+
+.main__ui .principalContent {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+}
+.main__ui .principalContent .left .leftContent{
+    padding: 20px;
+background-color: rgb(230, 223, 223);
+width: 330px;
+}
+.main__ui .principalContent .left .role{
+    font-size: 15px;
+}
+.main__ui .principalContent .right p{
+    margin-left: -20px;
+    width: 450px;
+    text-align: justify;
+}
+.main__ui .deptss{
+    margin-top: 50px;
+}
+.main__ui .deptss .btn {
+    padding: 20px;
+    width: 200px;
+    height: 150px;
+    background-color: blue;
+    text-align: center;
+    align-items: center;
+}
+.main__ui .deptss .btn button {
+    border: none;
+    background-color: blue;
+    height: 100px;
+    width: 150px;
+    text-align: center;
+    color: white;
+    font-weight: 800;
+    font-size: 18px;
+}
+.main__ui .deptss .btn button:hover {
+    background-color: rgb(98, 98, 158);
+    border-radius: 10px;
+}

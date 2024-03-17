@@ -1,0 +1,28 @@
+.vision {
+    margin-top: 50px;
+}
+.vision .contentt {
+    padding: 40px;
+    display: flex;
+}
+.vision .contentt .visionPart{
+    padding: 20px;
+    background-color: rgb(222, 214, 214);
+}
+.vision .contentt .visionPart ul li {
+    text-align: justify;
+}
+.vision .contentt .misionPart{
+    padding: 20px;
+    margin-left: 20px;
+    background-color: rgb(222, 214, 214);
+}
+.vision .contentt .misionPart ul li {
+    text-align: justify;
+}
+.vision .contentt .visionPart img{
+    max-height: 100px;
+}
+.vision .contentt .misionPart img{
+    max-height: 100px;
+}

@@ -1,39 +1,43 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { DeptContext } from './DeptContext';
 
 function StudentSignup() {
-    const [studentDetails, setStudentDetails] = useState({
-        rollnumber: '',
-        studentName: '',
-        email: '',
-        password: '',
-        contactNumber: '',
-        address: ''
-      });
-    
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setStudentDetails(prevState => ({
-          ...prevState,
-          [name]: value
-        }));
-      };
-    
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-          // Make POST request to your API endpoint
-          const response = await axios.post('http://localhost:8080/api/students/signup', studentDetails);
-          console.log(response.data); // Handle response from server
-          if(response.status === 200) {
-            alert("Hey "+response.data.studentName+"! Thank you for signing in. ")
-            window.location.href = '/student';
-          }
-        } catch (error) {
-          console.error('Error submitting form:', error);
-          alert('Error submitting form:'+ error)
-        }
-      };
+  const { dept, setDept } = useContext(DeptContext)
+  const [studentDetails, setStudentDetails] = useState({
+    rollnumber: '',
+    studentName: '',
+    department: dept,
+    semester: '',
+    email: '',
+    password: '',
+    contactNumber: '',
+    address: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setStudentDetails(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Make POST request to your API endpoint
+      const response = await axios.post('http://localhost:8080/api/students/signup', studentDetails);
+      console.log(response.data); // Handle response from server
+      if (response.status === 200) {
+        alert("Hey " + response.data.studentName + "! Thank you for signing in. ")
+        window.location.href = '/student';
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Error submitting form:' + error)
+    }
+  };
   return (
     <div className="login-box">
       <h2>Student Registration</h2>
@@ -62,6 +66,39 @@ function StudentSignup() {
         </div>
         <div className="user-box">
           <input
+            type="text"
+            id="department"
+            name="department"
+            value={dept}
+            onChange={handleChange}
+            required
+          />
+          <label htmlFor="studentName">Department Name</label>
+        </div>
+        <div className="user-box">
+          <input
+            type="text"
+            id="branch"
+            name="branch"
+            value={studentDetails.branch}
+            onChange={handleChange}
+            required
+          />
+          <label htmlFor="branch">Branch</label>
+        </div>
+        <div className="user-box">
+          <input
+            type="text"
+            id="semester"
+            name="semester"
+            value={studentDetails.semester}
+            onChange={handleChange}
+            required
+          />
+          <label htmlFor="branch">Semester</label>
+        </div>
+        <div className="user-box">
+          <input
             type="email"
             id="email"
             name="email"
@@ -81,17 +118,6 @@ function StudentSignup() {
             required
           />
           <label htmlFor="password">Password</label>
-        </div>
-        <div className="user-box">
-          <input
-            type="text"
-            id="branch"
-            name="branch"
-            value={studentDetails.branch}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="branch">Branch</label>
         </div>
         <div className="user-box">
           <input

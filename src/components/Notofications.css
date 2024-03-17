@@ -1,0 +1,15 @@
+.notifs {
+    padding-left: 150px;
+    padding-right: 150px;
+    padding-top: 50px;
+}
+.notifs table thead {
+    height: 50px;
+    background-color: rgb(207, 209, 210);
+}
+.notifs table tbody tr{
+    border: 1px solid rgb(205, 202, 202);
+}
+.notifs table tbody tr td{
+    border: 1px solid rgb(205, 202, 202);;
+}

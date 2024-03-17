@@ -1,0 +1,19 @@
+
+.predecessors {
+    padding: 50px;
+}
+.predecessors h1{
+    color: rgb(244, 194, 29);
+    text-align: center;
+}
+.predecessors table tr td {
+    border: 1px solid black;
+}
+.predecessors table tr td {
+    
+    margin-left: 5px;
+    background-color: aqua;
+}
+.predecessors table tr td h3{
+    font-size: 20px;
+}

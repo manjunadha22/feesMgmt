@@ -1,11 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
 import { useLocation } from "react-router-dom";
 import "./StudentHome.css";
 import axios from "axios";
 import jsPDF from "jspdf";
+import { DeptContext } from "./DeptContext";
 
 function StudentHome() {
+  const { dept, setDept } = useContext(DeptContext)
   const [totalAmount, setTotalAmount] = useState(0);
   const [amountPaid, setAmountPaid] = useState(0);
   const [totalAmountE, setTotalAmountE] = useState(0);
@@ -34,7 +36,7 @@ function StudentHome() {
       setShowExamFields(false);
       setTotalAmount(15000);
       setAmountPaid(0);
-      console.log(totalAmount - amountPaid)
+      console.log(totalAmount, amountPaid)
       setBalance(totalAmount - amountPaid);
     } else if (selectedOption === "Exam Fees") {
       console.log("hello");
@@ -49,9 +51,20 @@ function StudentHome() {
     }
   };
   const data = location.state.name;
+  let dataa;
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/students/getStudent/${data.rollnumber}`).then((res) => {
+
+      dataa = res.data
+    });
+    console.log(dataa)
+  }, [])
   const [studentDetails, setStudentDetails] = useState({
     rollnumber: data.rollnumber,
     studentName: data.studentName,
+    department: data.department,
+    branch: data.branch,
+    semester: data.semester,
     email: data.email,
     password: data.password,
     contactNumber: data.contactNumber,
@@ -68,6 +81,7 @@ function StudentHome() {
   const receipt = studentName + data.contactNumber.toString().substring(1, 5);
   const rollnumber = data.rollnumber;
   const handlePayButtonClick = () => {
+    axios.patch(`http://localhost:8080/api/students/updatePayment/${data.rollnumber}`, studentDetails);
     const amountToPay = parseFloat(prompt("Enter the amount to pay:", "0"));
     if (!isNaN(amountToPay)) {
       setPaymentAmount(amountToPay);
@@ -83,12 +97,13 @@ function StudentHome() {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       };
-      const response = await axios.post(
+      console.log(studentDetails);
+      const response = await axios.patch(
         `http://localhost:8080/api/students/update/${data.rollnumber}`,
         studentDetails,
         { headers }
       );
-      console.log(studentDetails);
+
       console.log(response.data); // Handle response from server
       if (response.status === 200) {
         alert(
@@ -114,14 +129,16 @@ function StudentHome() {
     doc.text(`Receipt No: ${receipt}`, 20, 30);
     doc.text(`Student Name: ${studentName}`, 20, 40);
     doc.text(`Roll Number: ${rollnumber}`, 20, 50);
-    doc.text(`Semester: ${sem}`, 20, 60);
-    doc.text(`Fee Type: ${feeType}`, 20, 70);
-    doc.text(`Total Amount to Pay: ${totalAmount}`, 20, 80);
-    doc.text(`Paid Amount: ${amountPaid}`, 20, 90);
-    doc.text(`Balance: ${balance}`, 20, 100);
-    doc.text(`Email Address: ${data.email}`, 20, 110);
-    doc.text(`Branch: ${data.branch}`, 20, 120);
-    doc.text(`Contact Number: ${data.contactNumber}`, 20, 130);
+    doc.text(`Department: ${dept}`, 20, 60);
+
+    doc.text(`Semester: ${sem}`, 20, 70);
+    doc.text(`Fee Type: ${feeType}`, 20, 80);
+    doc.text(`Total Amount to Pay: ${totalAmount}`, 20, 90);
+    doc.text(`Paid Amount: ${amountPaid}`, 20, 100);
+    doc.text(`Balance: ${balance}`, 20, 110);
+    doc.text(`Email Address: ${data.email}`, 20, 120);
+    doc.text(`Branch: ${data.branch}`, 20, 130);
+    doc.text(`Contact Number: ${data.contactNumber}`, 20, 140);
 
     // Save the PDF
     doc.save("Receipt.pdf");
@@ -140,13 +157,19 @@ function StudentHome() {
         <tr>
           <td>Student Name:</td>
           <td>
-            <input type="text" value={studentName} />
+            <input type="text" value={studentDetails.studentName} />
           </td>
         </tr>
         <tr>
           <td>Roll Number:</td>
           <td>
-            <input type="text" value={rollnumber} />
+            <input type="text" value={studentDetails.rollnumber} />
+          </td>
+        </tr>
+        <tr>
+          <td>Department:</td>
+          <td>
+            <input type="text" value={studentDetails.department} />
           </td>
         </tr>
         <tr>
@@ -290,6 +313,28 @@ function StudentHome() {
                   />
                 </div>
                 <div className="user-box">
+                  <label htmlFor="password">Department:</label>
+                  <input
+                    type="department"
+                    id="department"
+                    name="department"
+                    defaultValue={data.department}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="user-box">
+                  <label htmlFor="password">Semester:</label>
+                  <input
+                    type="semester"
+                    id="semester"
+                    name="semester"
+                    defaultValue={data.semester}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="user-box">
                   <label htmlFor="email">Email: </label>
                   <input
                     type="email"
@@ -300,17 +345,7 @@ function StudentHome() {
                     required
                   />
                 </div>
-                <div className="user-box">
-                  <label htmlFor="password">Password:</label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    defaultValue={data.password}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
+
                 <div className="user-box">
                   <label htmlFor="branch">Branch</label>
                   <input

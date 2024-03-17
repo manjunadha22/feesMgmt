@@ -15,7 +15,7 @@
 
 .header > img {
     width: 30%;
-    margin-left: 60px;
+    margin-left: 0px;
     object-fit: contain;
 }
 
@@ -24,8 +24,34 @@
     font-size: 16px;
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
+}
+.header__middle .header__middle__break1 {
+    display: flex;
+    flex-direction: column;
+}
+.header__middle .header__middle__break2 {
+    display: flex;
+    flex-direction: column;
+}
+.header__middle .header__middle__break3 {
+    display: flex;
+    flex-direction: column;
+}
+.header__middle .header__middle__break1 .header__option Link .noactive {
+   text-decoration: none;
+    color: #000048;
+    margin: 25px;
+    font-weight: 500; 
 }
 .header__option > a {
+    text-decoration: none;
+    color: #000048;
+    margin: 25px;
+    font-weight: 500;
+    font-size: 12px;
+}
+.notactive {
     text-decoration: none;
     color: #000048;
     margin: 25px;
@@ -45,7 +71,7 @@
 }
 
 .header__right {
-    margin-right: 30px;
+    margin-right: -30px;
     display: flex;
     align-items: center;
     /* justify-content: space-between; */
