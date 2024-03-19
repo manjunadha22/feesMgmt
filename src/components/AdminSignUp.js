@@ -24,7 +24,7 @@ function AdminSignUp() {
     e.preventDefault();
     try {
       // Make POST request to your API endpoint
-      const response = await axios.post('http://localhost:8080/api/admins/signup', adminDetails);
+      const response = await axios.post('http://localhost:8081/api/admins/signup', adminDetails);
       console.log(response.data); // Handle response from server
       if (response.status === 200) {
         alert("Hey " + response.data.empName + "! Thank you for signing up with us. ")
@@ -45,6 +45,7 @@ function AdminSignUp() {
             id="empld"
             name="empld"
             value={adminDetails.empld}
+            autoComplete="off"
             onChange={handleChange}
             required
           />
@@ -56,6 +57,7 @@ function AdminSignUp() {
             id="empName"
             name="empName"
             value={adminDetails.empName}
+            autoComplete="off"
             onChange={handleChange}
             required
           />
@@ -67,6 +69,7 @@ function AdminSignUp() {
             id="email"
             name="email"
             value={adminDetails.email}
+            autoComplete="off"
             onChange={handleChange}
             required
           />
@@ -78,6 +81,7 @@ function AdminSignUp() {
             id="password"
             name="password"
             value={adminDetails.password}
+            autoComplete="off"
             onChange={handleChange}
             required
           />
@@ -89,6 +93,7 @@ function AdminSignUp() {
             id="contactNumber"
             name="contactNumber"
             value={adminDetails.contactNumber}
+            autoComplete="off"
             onChange={handleChange}
             required
           />
@@ -100,6 +105,7 @@ function AdminSignUp() {
             id="address"
             name="address"
             value={adminDetails.address}
+            autoComplete="off"
             onChange={handleChange}
             required
           />

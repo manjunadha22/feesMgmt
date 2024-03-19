@@ -27,7 +27,7 @@ function StudentSignup() {
     e.preventDefault();
     try {
       // Make POST request to your API endpoint
-      const response = await axios.post('http://localhost:8080/api/students/signup', studentDetails);
+      const response = await axios.post('http://localhost:8081/api/students/signup', studentDetails);
       console.log(response.data); // Handle response from server
       if (response.status === 200) {
         alert("Hey " + response.data.studentName + "! Thank you for signing in. ")
@@ -48,6 +48,7 @@ function StudentSignup() {
             id="rollnumber"
             name="rollnumber"
             value={studentDetails.rollnumber}
+            autoComplete="off"
             onChange={handleChange}
             required
           />
@@ -59,6 +60,7 @@ function StudentSignup() {
             id="studentName"
             name="studentName"
             value={studentDetails.studentName}
+            autoComplete="off"
             onChange={handleChange}
             required
           />
@@ -71,6 +73,7 @@ function StudentSignup() {
             name="department"
             value={dept}
             onChange={handleChange}
+            autoComplete="off"
             required
           />
           <label htmlFor="studentName">Department Name</label>
@@ -81,6 +84,7 @@ function StudentSignup() {
             id="branch"
             name="branch"
             value={studentDetails.branch}
+            autoComplete="off"
             onChange={handleChange}
             required
           />
@@ -92,6 +96,7 @@ function StudentSignup() {
             id="semester"
             name="semester"
             value={studentDetails.semester}
+            autoComplete="off"
             onChange={handleChange}
             required
           />
@@ -103,6 +108,7 @@ function StudentSignup() {
             id="email"
             name="email"
             value={studentDetails.email}
+            autoComplete="off"
             onChange={handleChange}
             required
           />
@@ -114,6 +120,7 @@ function StudentSignup() {
             id="password"
             name="password"
             value={studentDetails.password}
+            autoComplete="off"
             onChange={handleChange}
             required
           />
@@ -125,6 +132,7 @@ function StudentSignup() {
             id="contactNumber"
             name="contactNumber"
             value={studentDetails.contactNumber}
+            autoComplete="off"
             onChange={handleChange}
             required
           />
@@ -136,6 +144,7 @@ function StudentSignup() {
             id="address"
             name="address"
             value={studentDetails.address}
+            autoComplete="off"
             onChange={handleChange}
             required
           />

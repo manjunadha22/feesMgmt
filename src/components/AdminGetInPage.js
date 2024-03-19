@@ -28,7 +28,7 @@ function AdminGetInPage() {
     e.preventDefault();
     try {
       // Make POST request to your API endpoint
-      const response = await axios.post('http://localhost:8080/api/admins/signin', adminDetails);
+      const response = await axios.post('http://localhost:8081/api/admins/signin', adminDetails);
       console.log(response.data); // Handle response from server
       setErrorMsg(false)
       if (response.status === 200) {
@@ -61,6 +61,7 @@ function AdminGetInPage() {
             id="email"
             name="email"
             value={adminDetails.email}
+            autoComplete="off"
             onChange={handleChange}
             required
           />
@@ -72,6 +73,7 @@ function AdminGetInPage() {
             type="password"
             id="password"
             name="password"
+            autoComplete="off"
             value={adminDetails.password}
             onChange={handleChange}
             required

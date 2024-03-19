@@ -53,7 +53,7 @@ function StudentHome() {
   const data = location.state.name;
   let dataa;
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/students/getStudent/${data.rollnumber}`).then((res) => {
+    axios.get(`http://localhost:8081/api/students/getStudent/${data.rollnumber}`).then((res) => {
 
       dataa = res.data
     });
@@ -81,7 +81,7 @@ function StudentHome() {
   const receipt = studentName + data.contactNumber.toString().substring(1, 5);
   const rollnumber = data.rollnumber;
   const handlePayButtonClick = () => {
-    axios.patch(`http://localhost:8080/api/students/updatePayment/${data.rollnumber}`, studentDetails);
+    axios.patch(`http://localhost:8081/api/students/updatePayment/${data.rollnumber}`, studentDetails);
     const amountToPay = parseFloat(prompt("Enter the amount to pay:", "0"));
     if (!isNaN(amountToPay)) {
       setPaymentAmount(amountToPay);
@@ -99,7 +99,7 @@ function StudentHome() {
       };
       console.log(studentDetails);
       const response = await axios.patch(
-        `http://localhost:8080/api/students/update/${data.rollnumber}`,
+        `http://localhost:8081/api/students/update/${data.rollnumber}`,
         studentDetails,
         { headers }
       );

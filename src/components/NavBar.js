@@ -54,7 +54,7 @@ function NavBar() {
                 <div className="circle">
                     2
                 </div>
-                {(!user && !student) && <Link to="/student"><Button variant="contained" className='btn'>Login</Button></Link>}
+                {(!user && !student) && <Link to="/departments"><Button variant="contained" className='btn'>Login</Button></Link>}
                 {(user || student) && <Link to="/"><Button variant="contained" className='btn' onClick={() => {
                     setUser("")
                     setStudent("")
