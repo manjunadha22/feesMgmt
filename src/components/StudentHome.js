@@ -135,10 +135,12 @@ function StudentHome() {
     doc.text(`Fee Type: ${feeType}`, 20, 80);
     doc.text(`Total Amount to Pay: ${totalAmount}`, 20, 90);
     doc.text(`Paid Amount: ${amountPaid}`, 20, 100);
-    doc.text(`Balance: ${balance}`, 20, 110);
+    doc.text(`Due: ${balance}`, 20, 110);
     doc.text(`Email Address: ${data.email}`, 20, 120);
     doc.text(`Branch: ${data.branch}`, 20, 130);
     doc.text(`Contact Number: ${data.contactNumber}`, 20, 140);
+    doc.text(`Contact Number: ${data.paymentStatus}`, 20, 150);
+    doc.text(`Contact Number: ${data.paidDate}`, 20, 160);
 
     // Save the PDF
     doc.save("Receipt.pdf");
@@ -207,7 +209,7 @@ function StudentHome() {
                   Paid amount: <input type="text" value={amountPaid} />
                 </label>
                 <label>
-                  Balance: <input type="text" value={balance} />
+                  Due: <input type="text" value={balance} />
                 </label>
                 <button onClick={handlePayButtonClick}>Pay</button>
                 {paymentAmount > 0 && (
@@ -228,7 +230,7 @@ function StudentHome() {
                   Paid amount: <input type="text" value={amountPaidE} />
                 </label>
                 <label>
-                  Balance: <input type="text" value={balanceE} />
+                  Due: <input type="text" value={balanceE} />
                 </label>
                 <button onClick={handlePayButtonClick}>Pay</button>
                 {paymentAmount > 0 && (

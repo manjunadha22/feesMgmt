@@ -42,9 +42,9 @@ function InitialPage() {
         <div className="latest__updates">
           <span className='latest'>LATEST UPDATES</span>
           <marquee behavior="scroll" direction="left" className="update">
-            <img src={process.env.PUBLIC_URL + "/images/new.gif"} alt="" /> Latest updates here
-            <img src={process.env.PUBLIC_URL + "/images/new.gif"} alt="" /> Latest updates here
-            <img src={process.env.PUBLIC_URL + "/images/new.gif"} alt="" /> Latest updates here
+            <img src={process.env.PUBLIC_URL + "/images/new.gif"} alt="" /> MCA 1st Year - External laboratory Examinations will be held on 22/03/2024
+            <img src={process.env.PUBLIC_URL + "/images/new.gif"} alt="" /> MCA 2nd Year - External laboratory Examinations will be held on 28/03/2024
+            <img src={process.env.PUBLIC_URL + "/images/new.gif"} alt="" /> ICET notification has been released
           </marquee>
         </div>
         <div className="banner__content">
