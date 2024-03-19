@@ -139,8 +139,8 @@ function StudentHome() {
     doc.text(`Email Address: ${data.email}`, 20, 120);
     doc.text(`Branch: ${data.branch}`, 20, 130);
     doc.text(`Contact Number: ${data.contactNumber}`, 20, 140);
-    doc.text(`Contact Number: ${data.paymentStatus}`, 20, 150);
-    doc.text(`Contact Number: ${data.paidDate}`, 20, 160);
+    doc.text(`Payment Status: paid`, 20, 150);
+    doc.text(`Paid Date: 2024-03-19`, 20, 160);
 
     // Save the PDF
     doc.save("Receipt.pdf");
