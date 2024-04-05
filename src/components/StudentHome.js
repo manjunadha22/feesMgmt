@@ -144,12 +144,17 @@ function StudentHome() {
     }
   };
   const generateReceipt = () => {
+    axios.get(`http://localhost:8081/api/students/getStudent/${data.rollnumber}`).then((res) => {
+
+      dataa = res.data
+    });
     const doc = new jsPDF();
 
     doc.setFontSize(22);
+    doc.rect(10, 5, 180, 280);
     doc.text(
-      `SV University ${showTutionFields ? "Tution Fees" : "Exam Fees"}`,
-      20,
+      `Your ${showTutionFields ? "Tution Fees" : "Exam Fees"} Receipt`,
+      50,
       20
     );
     doc.setFontSize(16);
@@ -166,8 +171,14 @@ function StudentHome() {
     doc.text(`Email Address: ${data.email}`, 20, 120);
     doc.text(`Branch: ${data.branch}`, 20, 130);
     doc.text(`Contact Number: ${data.contactNumber}`, 20, 140);
-    doc.text(`Payment Status: paid`, 20, 150);
-    doc.text(`Paid Date: 2024-03-19`, 20, 160);
+    doc.text(`Exam Fees: ${data.examFees}`, 20, 150);
+    doc.text(`Tution Fees: ${data.tutionFees}`, 20, 160);
+    doc.text(`Paid amount of tution fees: ${data.paidAmountOfTutionFees}`, 20, 170);
+    doc.text(`Paid amount of exam fees: ${data.paidAmountOfExamFees}`, 20, 180);
+    doc.text(`Due of Tution Fees: ${data.dueOfTutionFees}`, 20, 190);
+    doc.text(`Due of Exam Fees: ${data.dueOfExamFees}`, 20, 200);
+    doc.text(`Payment Status: paid`, 20, 210);
+    doc.text(`Paid Date: 2024-03-19`, 20, 220);
 
     // Save the PDF
     doc.save("Receipt.pdf");
