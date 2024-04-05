@@ -41,14 +41,14 @@ function StudentSignup() {
   return (
     <div className="login-box">
       <h2>Student Registration</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autoComplete="off">
         <div className="user-box">
           <input
             type="text"
             id="rollnumber"
             name="rollnumber"
             value={studentDetails.rollnumber}
-            autoComplete="off"
+            autoComplete="false"
             onChange={handleChange}
             required
           />
@@ -60,7 +60,7 @@ function StudentSignup() {
             id="studentName"
             name="studentName"
             value={studentDetails.studentName}
-            autoComplete="off"
+            autoComplete="false"
             onChange={handleChange}
             required
           />
@@ -84,7 +84,7 @@ function StudentSignup() {
             id="branch"
             name="branch"
             value={studentDetails.branch}
-            autoComplete="off"
+            autoComplete="false"
             onChange={handleChange}
             required
           />
@@ -96,7 +96,7 @@ function StudentSignup() {
             id="semester"
             name="semester"
             value={studentDetails.semester}
-            autoComplete="off"
+            autoComplete="false"
             onChange={handleChange}
             required
           />
@@ -108,7 +108,7 @@ function StudentSignup() {
             id="email"
             name="email"
             value={studentDetails.email}
-            autoComplete="off"
+            autoComplete="false"
             onChange={handleChange}
             required
           />
@@ -120,7 +120,7 @@ function StudentSignup() {
             id="password"
             name="password"
             value={studentDetails.password}
-            autoComplete="off"
+            autoComplete="false"
             onChange={handleChange}
             required
           />
@@ -132,7 +132,7 @@ function StudentSignup() {
             id="contactNumber"
             name="contactNumber"
             value={studentDetails.contactNumber}
-            autoComplete="off"
+            autoComplete="false"
             onChange={handleChange}
             required
           />
@@ -144,7 +144,7 @@ function StudentSignup() {
             id="address"
             name="address"
             value={studentDetails.address}
-            autoComplete="off"
+            autoComplete="false"
             onChange={handleChange}
             required
           />

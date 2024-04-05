@@ -83,3 +83,54 @@ h5 {
     margin-right: 100px;
     /* margin-bottom: 200px; */
 }
+
+#slider1 {
+    position: absolute;
+    margin-top: 230px;
+    margin-left: 670px;
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+}
+#slider0 {
+    position: absolute;
+    margin-top: 220px;
+    margin-left: 660px;
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+}
+#slider3 {
+    position: absolute;
+    margin-top: 220px;
+    margin-left: 600px;
+    color: white;
+    font-weight: 800;
+}
+#slider01{
+    position: absolute;
+    margin-top: 180px;
+    margin-left: 830px;
+    z-index: 2200;
+    opacity: 20;
+    /* height: 150px; */
+    /* background-color: red; */
+}
+#slider11{
+    position: absolute;
+    margin-top: 170px;
+    margin-left: 900px;
+    z-index: 2200;
+    opacity: 9;
+    /* height: 150px; */
+    /* background-color: red; */
+}
+#slider31{
+    position: absolute;
+    margin-top: 140px;
+    margin-left: 720px;
+    z-index: 2200;
+    opacity: 9;
+    /* height: 150px; */
+    /* background-color: red; */
+}

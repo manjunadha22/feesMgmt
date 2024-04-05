@@ -15,6 +15,7 @@ function StudentHome() {
   const [balance, setBalance] = useState(0);
   const [balanceE, setBalanceE] = useState(0);
   const [paymentAmount, setPaymentAmount] = useState(0);
+  const [paymentAmountExam, setPaymentAmountExam] = useState(0);
   // const { student } = useContext(UserContext);
   const location = useLocation();
   const [feeType, setFeeType] = useState("");
@@ -69,6 +70,10 @@ function StudentHome() {
     password: data.password,
     contactNumber: data.contactNumber,
     address: data.address,
+    paidAmountOfTutionFees: data.paidAmountOfTutionFees,
+    paidAmountOfExamFees: data.paidAmountOfExamFees,
+    dueOfTutionFees: data.dueOfTutionFees,
+    dueOfExamFees: data.dueOfExamFees
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -80,13 +85,35 @@ function StudentHome() {
   let studentName = data.studentName;
   const receipt = studentName + data.contactNumber.toString().substring(1, 5);
   const rollnumber = data.rollnumber;
-  const handlePayButtonClick = () => {
-    axios.patch(`http://localhost:8081/api/students/updatePayment/${data.rollnumber}`, studentDetails);
+  const handlePayButtonClickTution = () => {
     const amountToPay = parseFloat(prompt("Enter the amount to pay:", "0"));
+    studentDetails.paidAmountOfTutionFees = amountToPay
+    studentDetails.dueOfTutionFees = totalAmount - amountToPay
+    axios.patch(`http://localhost:8081/api/students/updatePayment/${data.rollnumber}`, studentDetails);
+
     if (!isNaN(amountToPay)) {
       setPaymentAmount(amountToPay);
     }
     setAmountPaid(amountToPay);
+
+    setBalance(totalAmount - amountToPay);
+  };
+  const handlePayButtonClickExam = () => {
+    const amountToPay = parseFloat(prompt("Enter the amount to pay:", "0"));
+    // setStudentDetails((prevState) => ({
+    //   ...prevState,
+    //   [paidAmountOfExamFees]: amountToPay,
+    //   [dueOfExamFees]: totalAmountE - amountToPay
+    // }));
+    studentDetails.paidAmountOfExamFees = amountToPay
+    studentDetails.dueOfExamFees = totalAmountE - amountToPay
+    console.log(studentDetails)
+    axios.patch(`http://localhost:8081/api/students/updatePayment/${data.rollnumber}`, studentDetails);
+
+    if (!isNaN(amountToPay)) {
+      setPaymentAmountExam(amountToPay);
+    }
+    setAmountPaidE(amountToPay);
     setBalance(totalAmount - amountToPay);
   };
   const handleSubmit = async (e) => {
@@ -209,9 +236,9 @@ function StudentHome() {
                   Paid amount: <input type="text" value={amountPaid} />
                 </label>
                 <label>
-                  Due: <input type="text" value={balance} />
+                  Due: <input type="text" value={totalAmount - amountPaid} />
                 </label>
-                <button onClick={handlePayButtonClick}>Pay</button>
+                <button onClick={handlePayButtonClickTution}>Pay</button>
                 {paymentAmount > 0 && (
                   <div>
                     <h4>You have paid: {paymentAmount}</h4>
@@ -230,11 +257,11 @@ function StudentHome() {
                   Paid amount: <input type="text" value={amountPaidE} />
                 </label>
                 <label>
-                  Due: <input type="text" value={balanceE} />
+                  Due: <input type="text" value={totalAmountE - amountPaidE} />
                 </label>
-                <button onClick={handlePayButtonClick}>Pay</button>
-                {paymentAmount > 0 && (
-                  <p className="output">You have paid: {paymentAmount}</p>
+                <button onClick={handlePayButtonClickExam}>Pay</button>
+                {paymentAmountExam > 0 && (
+                  <p className="output">You have paid: {paymentAmountExam}</p>
                 )}
               </div>
             )}

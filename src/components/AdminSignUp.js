@@ -38,14 +38,14 @@ function AdminSignUp() {
   return (
     <div className='login-box'>
       <h2>Admin Registration</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autoComplete="off">
         <div className="user-box">
           <input
             type="text"
             id="empld"
             name="empld"
             value={adminDetails.empld}
-            autoComplete="off"
+            autoComplete="false"
             onChange={handleChange}
             required
           />
@@ -57,7 +57,7 @@ function AdminSignUp() {
             id="empName"
             name="empName"
             value={adminDetails.empName}
-            autoComplete="off"
+            autoComplete="false"
             onChange={handleChange}
             required
           />
@@ -69,7 +69,7 @@ function AdminSignUp() {
             id="email"
             name="email"
             value={adminDetails.email}
-            autoComplete="off"
+            autoComplete="false"
             onChange={handleChange}
             required
           />
@@ -81,7 +81,7 @@ function AdminSignUp() {
             id="password"
             name="password"
             value={adminDetails.password}
-            autoComplete="off"
+            autoComplete="false"
             onChange={handleChange}
             required
           />
@@ -93,7 +93,7 @@ function AdminSignUp() {
             id="contactNumber"
             name="contactNumber"
             value={adminDetails.contactNumber}
-            autoComplete="off"
+            autoComplete="false"
             onChange={handleChange}
             required
           />
@@ -105,7 +105,7 @@ function AdminSignUp() {
             id="address"
             name="address"
             value={adminDetails.address}
-            autoComplete="off"
+            autoComplete="false"
             onChange={handleChange}
             required
           />

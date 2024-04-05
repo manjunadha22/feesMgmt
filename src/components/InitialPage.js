@@ -13,20 +13,22 @@ function InitialPage() {
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
+            <p id='slider0'>A. P. J. Abdul Kalam</p>
+            <img id='slider01' src={process.env.PUBLIC_URL + '/images/double.png'} alt="" />
             <img class="d-block w-100" src={process.env.PUBLIC_URL + '/images/slider.png'} alt="First slide" />
           </div>
           <div class="carousel-item">
+            <p id='slider1'>Dr. Babasaheb Ambedkar</p>
+            <img id='slider11' src={process.env.PUBLIC_URL + '/images/double.png'} alt="" />
             <img class="d-block w-100" src={process.env.PUBLIC_URL + '/images/slider1.png'} alt="Second slide" />
           </div>
           <div class="carousel-item">
+            <p id='slider3'>Nelson Rolihlahla Mandela</p>
+            <img id='slider31' src={process.env.PUBLIC_URL + '/images/double.png'} alt="" />
             <img class="d-block w-100" src={process.env.PUBLIC_URL + '/images/slider3.png'} alt="Third slide" />
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src={process.env.PUBLIC_URL + '/images/slider4.png'} alt="Third slide" />
           </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

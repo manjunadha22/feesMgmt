@@ -51,7 +51,7 @@ function AdminGetInPage() {
   return (
     <div className="login-box">
       <h2>Admin Login</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autoComplete="off">
 
 
         <div className="user-box">
@@ -61,7 +61,7 @@ function AdminGetInPage() {
             id="email"
             name="email"
             value={adminDetails.email}
-            autoComplete="off"
+            autoComplete="false"
             onChange={handleChange}
             required
           />
@@ -73,7 +73,7 @@ function AdminGetInPage() {
             type="password"
             id="password"
             name="password"
-            autoComplete="off"
+            autoComplete="false"
             value={adminDetails.password}
             onChange={handleChange}
             required

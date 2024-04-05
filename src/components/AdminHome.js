@@ -4,6 +4,7 @@ import "./AdminHome.css";
 import axios from "axios";
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import html2canvas from 'html2canvas';
+import jsPDF from "jspdf";
 
 function AdminHome() {
   const [students, setStudents] = useState([]);
@@ -27,7 +28,13 @@ function AdminHome() {
     contactNumber: "",
     address: "",
     paymentStatus: '',
-    paidDate: ""
+    paidDate: "",
+    tutionFees: 0,
+    examFees: 0,
+    paidAmountOfTutionFees: 0,
+    paidAmountOfExamFees: 0,
+    dueOfTutionFees: 0,
+    dueOfExamFees: 0
   });
 
   useEffect(() => {
@@ -65,6 +72,12 @@ function AdminHome() {
       searchesStudent.address = res.data.address
       searchesStudent.paymentStatus = res.data.paymentStatus
       searchesStudent.paidDate = res.data.paidDate
+      searchesStudent.tutionFees = res.data.tutionFees
+      searchesStudent.examFees = res.data.examFees
+      searchesStudent.paidAmountOfTutionFees = res.data.paidAmountOfTutionFees
+      searchesStudent.paidAmountOfExamFees = res.data.paidAmountOfExamFees
+      searchesStudent.dueOfTutionFees = res.data.dueOfTutionFees
+      searchesStudent.dueOfExamFees = res.data.dueOfExamFees
     })
     console.log(fetchStudents())
   }
@@ -115,6 +128,12 @@ function AdminHome() {
             <th>Branch</th>
             <th>Contact Number</th>
             <th>Address</th>
+            <th>Tution Fees</th>
+            <th>Exam Fees</th>
+            <th>Paid Amount of tution fees</th>
+            <th>Paid Amount of exam fees</th>
+            <th>Due of tution fees</th>
+            <th>Due of exam fees</th>
             <th>Payment Status</th>
             <th>paid</th>
           </tr>
@@ -130,6 +149,12 @@ function AdminHome() {
               <td>{student.branch}</td>
               <td>{student.contactNumber}</td>
               <td>{student.address}</td>
+              <td>{student.tutionFees}</td>
+              <td>{student.examFees}</td>
+              <td>{student.paidAmountOfTutionFees}</td>
+              <td>{student.paidAmountOfExamFees}</td>
+              <td>{student.dueOfTutionFees}</td>
+              <td>{student.dueOfExamFees}</td>
               <td>{student.paymentStatus}</td>
               <td>{student.paidDate}</td>
             </tr>
@@ -151,6 +176,12 @@ function AdminHome() {
               <th>Branch</th>
               <th>Contact Number</th>
               <th>Address</th>
+              <th>Tution Fees</th>
+              <th>Exam Fees</th>
+              <th>Paid Amount of tution fees</th>
+              <th>Paid Amount of exam fees</th>
+              <th>Due of tution fees</th>
+              <th>Due of exam fees</th>
               <th>Payment Status</th>
               <th>paid</th>
             </tr>
@@ -165,6 +196,12 @@ function AdminHome() {
               <td>{searchesStudent.branch}</td>
               <td>{searchesStudent.contactNumber}</td>
               <td>{searchesStudent.address}</td>
+              <td>{searchesStudent.tutionFees}</td>
+              <td>{searchesStudent.examFees}</td>
+              <td>{searchesStudent.paidAmountOfTutionFees}</td>
+              <td>{searchesStudent.paidAmountOfExamFees}</td>
+              <td>{searchesStudent.dueOfTutionFees}</td>
+              <td>{searchesStudent.dueOfExamFees}</td>
               <td>{searchesStudent.paymentStatus}</td>
               <td>{searchesStudent.paidDate}</td>
             </tr>
