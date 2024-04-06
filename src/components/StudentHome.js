@@ -114,7 +114,7 @@ function StudentHome() {
       setPaymentAmountExam(amountToPay);
     }
     setAmountPaidE(amountToPay);
-    setBalance(totalAmountE - amountToPay);
+    setBalance(totalAmount - amountToPay);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -162,26 +162,22 @@ function StudentHome() {
     doc.text(`Student Name: ${studentName}`, 20, 40);
     doc.text(`Roll Number: ${rollnumber}`, 20, 50);
     doc.text(`Department: ${dept}`, 20, 60);
-
     doc.text(`Semester: ${sem}`, 20, 70);
-    doc.text(`Fee Type: ${feeType}`, 20, 80);
-    doc.text(`Total Amount to Pay for tution fees: ${totalAmount}`, 20, 90);
-    doc.text(`Paid Amount for tution fees: ${amountPaid}`, 20, 100);
-    doc.text(`Due for tution fees: ${balance}`, 20, 110);
-    doc.text(`Total Amount to Pay for tution fees: ${totalAmountE}`, 20, 90);
-    doc.text(`Paid Amount for tution fees: ${amountPaidE}`, 20, 100);
-    doc.text(`Due for tution fees: ${balanceE}`, 20, 110);
-    doc.text(`Email Address: ${data.email}`, 20, 120);
-    doc.text(`Branch: ${data.branch}`, 20, 130);
-    doc.text(`Contact Number: ${data.contactNumber}`, 20, 140);
-    doc.text(`Exam Fees: ${data.examFees}`, 20, 150);
-    doc.text(`Tution Fees: ${data.tutionFees}`, 20, 160);
-    doc.text(`Paid amount of tution fees: ${data.paidAmountOfTutionFees}`, 20, 170);
-    doc.text(`Paid amount of exam fees: ${data.paidAmountOfExamFees}`, 20, 180);
-    doc.text(`Due of Tution Fees: ${data.dueOfTutionFees}`, 20, 190);
-    doc.text(`Due of Exam Fees: ${data.dueOfExamFees}`, 20, 200);
-    doc.text(`Payment Status: paid`, 20, 210);
-    doc.text(`Paid Date: 2024-03-19`, 20, 220);
+    doc.text(`Email Address: ${data.email}`, 20, 80);
+    doc.text(`Branch: ${data.branch}`, 20, 90);
+    doc.text(`Contact Number: ${data.contactNumber}`, 20, 100);
+    doc.text(`Fee Type: ${feeType}`, 20, 110);
+    if (feeType === "Tution Fees") {
+      doc.text(`Total Amount to Pay: ${totalAmount}`, 20, 120);
+      doc.text(`Paid Amount: ${amountPaid}`, 20, 130);
+      doc.text(`Due : ${balance}`, 20, 140);
+    } else {
+      doc.text(`Total Amount to Pay: ${totalAmountE}`, 20, 120);
+      doc.text(`Paid Amount: ${amountPaidE}`, 20, 130);
+      doc.text(`Due for tution fees : ${totalAmountE - amountPaidE}`, 20, 140);
+    }
+    doc.text(`Payment Status: paid`, 20, 150);
+    doc.text(`Paid Date: 2024-03-19`, 20, 160);
 
     // Save the PDF
     doc.save("Receipt.pdf");
