@@ -114,7 +114,7 @@ function StudentHome() {
       setPaymentAmountExam(amountToPay);
     }
     setAmountPaidE(amountToPay);
-    setBalance(totalAmount - amountToPay);
+    setBalance(totalAmountE - amountToPay);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -165,9 +165,12 @@ function StudentHome() {
 
     doc.text(`Semester: ${sem}`, 20, 70);
     doc.text(`Fee Type: ${feeType}`, 20, 80);
-    doc.text(`Total Amount to Pay: ${totalAmount}`, 20, 90);
-    doc.text(`Paid Amount: ${amountPaid}`, 20, 100);
-    doc.text(`Due: ${balance}`, 20, 110);
+    doc.text(`Total Amount to Pay for tution fees: ${totalAmount}`, 20, 90);
+    doc.text(`Paid Amount for tution fees: ${amountPaid}`, 20, 100);
+    doc.text(`Due for tution fees: ${balance}`, 20, 110);
+    doc.text(`Total Amount to Pay for tution fees: ${totalAmountE}`, 20, 90);
+    doc.text(`Paid Amount for tution fees: ${amountPaidE}`, 20, 100);
+    doc.text(`Due for tution fees: ${balanceE}`, 20, 110);
     doc.text(`Email Address: ${data.email}`, 20, 120);
     doc.text(`Branch: ${data.branch}`, 20, 130);
     doc.text(`Contact Number: ${data.contactNumber}`, 20, 140);
