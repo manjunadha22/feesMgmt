@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import './AdminGetInPage.css'
 import axios from 'axios';
+import validator from 'validator';
+import parse from 'html-react-parser';
 
 function AdminSignUp() {
   const [adminDetails, setAdminDetails] = useState({
@@ -11,15 +13,35 @@ function AdminSignUp() {
     contactNumber: '',
     address: ''
   });
+  const [showSubmit, SetShowSubmit] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "password") {
+      validate(e.target.value)
+    }
     setAdminDetails(prevState => ({
       ...prevState,
       [name]: value
     }));
   };
 
+  const validate = (value) => {
+    if (validator.isStrongPassword(value, {
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+    })) {
+      setErrorMessage('');
+      SetShowSubmit(true)
+    } else {
+      SetShowSubmit(false)
+      setErrorMessage(parse(`Your password must contain 8 characters <br> Your password mush have atleast one digit ('0' - '9') <br> Password must have atleast one uppercase letter ('A'-'Z') <br> Your password must have atlest one special character`));
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -86,6 +108,10 @@ function AdminSignUp() {
             required
           />
           <label htmlFor="password">Password</label>
+          <br />
+          {errorMessage === '' ? null : (
+            <span style={{ fontWeight: 'bold', color: 'red' }}>{errorMessage}</span>
+          )}
         </div>
         <div className="user-box">
           <input
@@ -110,6 +136,10 @@ function AdminSignUp() {
             required
           />
           <label htmlFor="address">Address</label>
+          <br />
+          {errorMessage === '' ? null : (
+            <span style={{ fontWeight: 'bold', color: 'red' }}>{errorMessage}</span>
+          )}
         </div>
         <button type="submit">Submit</button>
       </form>

@@ -59,11 +59,6 @@ function NavBar() {
                     setUser("")
                     setStudent("")
                 }}>Logout</Button></Link>}
-                {/* {!student && <Link to="/student"><Button variant="contained" className='btn'>Student</Button></Link>}
-                {student && <Link to="/"><Button variant="contained" className='btn' onClick={() => {
-                    setUser("")
-                    setStudent("")
-                }}>Logout</Button></Link>} */}
             </div>
         </div>
     )

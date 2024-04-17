@@ -22,3 +22,82 @@ button {
 h4 {
     font-size: 20px;
 }
+.who {
+    display: flex;
+}
+
+.payment {
+    padding-top: 200px;
+    padding-left: 200px;
+}
+
+    /* Style for the buttons */
+    .buttonss button {
+        background-color: #0074D9;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    /* Style for the cancel button */
+    .buttonss button:last-child {
+        background-color: #FF4136;
+    }
+
+.pay {
+    margin-left: 150px;
+}
+.det {
+    margin-top: 20px;
+}
+        .payment {
+            margin-left: 150px;
+            display: flex;
+            flex-direction: column;
+            margin-top: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .heading {
+            margin-top: 20px;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .radioBtns {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 50px;
+        }
+        .radioBtns input[type="radio"] {
+            margin-right: 5px;
+            margin-top: 10px;
+        }
+        .radiol {
+            display: flex;
+            align-items: center;
+        }
+        .radiol label {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+        .buttonss {
+            display: flex;
+            justify-content: space-between;
+        }
+        .buttonss button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .buttonss button:hover {
+            background-color: #0056b3;
+        }

@@ -4,10 +4,14 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from './UserContext';
 import { FormContext } from './FormContext';
+import validator from 'validator';
+import parse from 'html-react-parser';
 
 function StudentGetInPage() {
   const navigate = useNavigate();
   const { user, setUser } = useContext(FormContext)
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showSubmit, SetShowSubmit] = useState(false)
   const { student, setStudent } = useContext(UserContext)
   const [errorMsg, setErrorMsg] = useState(false)
   const [adminDetails, setAdminDetails] = useState({
@@ -18,10 +22,29 @@ function StudentGetInPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "password") {
+      validate(e.target.value)
+    }
     setAdminDetails(prevState => ({
       ...prevState,
       [name]: value
     }));
+  };
+
+  const validate = (value) => {
+    if (validator.isStrongPassword(value, {
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+    })) {
+      setErrorMessage('');
+      SetShowSubmit(true)
+    } else {
+      SetShowSubmit(false)
+      setErrorMessage(parse(`Your password must contain 8 characters <br> Your password mush have atleast one digit ('0' - '9') <br> Password must have atleast one uppercase letter ('A'-'Z') <br> Your password must have atlest one special character`));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -78,6 +101,10 @@ function StudentGetInPage() {
             required
           />
           <label htmlFor="password">Password</label>
+          <br />
+          {errorMessage === '' ? null : (
+            <span style={{ fontWeight: 'bold', color: 'red' }}>{errorMessage}</span>
+          )}
         </div>
         {errorMsg && <p>Invalid Credentials</p>}
 

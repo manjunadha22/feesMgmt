@@ -25,41 +25,48 @@ import Term from './components/Term';
 import Notofications from './components/Notofications';
 import Departments from './components/Departments';
 import { DeptProvider } from './components/DeptContext';
+import Payment from './components/Payment';
+import { AmountProvider } from './components/AmountContext';
+import { PaymentMethodProvider } from './components/PaymentMethod';
 // import { createBrowserHistory } from 'history';
 
 function App() {
   // const history = createBrowserHistory();
   return (
     <div className="App">
-      <DeptProvider>
-        <UserProvider>
-          <FormContextProvider>
-            <NavBar />
-
-            <Routes>
-              <Route exact path="/" element={<InitialPage />} />
-              <Route path="/admin" element={<AdminGetInPage />} />
-              <Route path="/student" element={<StudentGetInPage />} />
-              <Route path="/adminSignup" element={<AdminSignUp />} />
-              <Route path="/studentSignup" element={<StudentSignup />} />
-              <Route path="/studentHome" element={<StudentHome />} />
-              <Route path="/updateStudent" element={<UpdateStudent />} />
-              <Route path="/adminHome" element={<AdminHome />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<ContactUs />} />
-              <Route path="/campustour" element={<CampusTour />} />
-              <Route path="/vision" element={<Vision />} />
-              <Route path="/administration" element={<Administration />} />
-              <Route path="/ourpredecessors" element={<OurPredecessors />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/term" element={<Term />} />
-              <Route path="/notifications" element={<Notofications />} />
-              <Route path="/departments" element={<Departments />} />
-            </Routes>
-            <Footer className="footer" />
-          </FormContextProvider>
-        </UserProvider>
-      </DeptProvider>
+      <PaymentMethodProvider>
+        <AmountProvider>
+          <DeptProvider>
+            <UserProvider>
+              <FormContextProvider>
+                <NavBar />
+                <Routes>
+                  <Route exact path="/" element={<InitialPage />} />
+                  <Route path="/admin" element={<AdminGetInPage />} />
+                  <Route path="/student" element={<StudentGetInPage />} />
+                  <Route path="/adminSignup" element={<AdminSignUp />} />
+                  <Route path="/studentSignup" element={<StudentSignup />} />
+                  <Route path="/studentHome" element={<StudentHome />} />
+                  <Route path="/updateStudent" element={<UpdateStudent />} />
+                  <Route path="/adminHome" element={<AdminHome />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<ContactUs />} />
+                  <Route path="/campustour" element={<CampusTour />} />
+                  <Route path="/vision" element={<Vision />} />
+                  <Route path="/administration" element={<Administration />} />
+                  <Route path="/ourpredecessors" element={<OurPredecessors />} />
+                  <Route path="/privacy" element={<Privacy />} />
+                  <Route path="/term" element={<Term />} />
+                  <Route path="/notifications" element={<Notofications />} />
+                  <Route path="/departments" element={<Departments />} />
+                  <Route path="/payment" element={<Payment />} />
+                </Routes>
+                <Footer className="footer" />
+              </FormContextProvider>
+            </UserProvider>
+          </DeptProvider>
+        </AmountProvider>
+      </PaymentMethodProvider>
 
     </div>
   );

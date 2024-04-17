@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./StudentHome.css";
 import axios from "axios";
 import jsPDF from "jspdf";
 import { DeptContext } from "./DeptContext";
 
 function StudentHome() {
+  const navigate = useNavigate();
   const { dept, setDept } = useContext(DeptContext)
   const [totalAmount, setTotalAmount] = useState(0);
   const [amountPaid, setAmountPaid] = useState(0);
@@ -22,12 +23,16 @@ function StudentHome() {
   const [sem, setSem] = useState("");
   const [showTutionFields, setShowTutionFields] = useState(false);
   const [showExamFields, setShowExamFields] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [showDownload, setShowDownload] = useState(false)
+  const [showCancel, setShowCancel] = useState(true)
 
   const handleSem = (e) => {
     setSem(e.target.value)
   }
 
   const handleFeeTypeChange = (event) => {
+    setShowCancel(true)
     const selectedOption = event.target.value;
 
     setFeeType(selectedOption);
@@ -73,7 +78,7 @@ function StudentHome() {
     paidAmountOfTutionFees: data.paidAmountOfTutionFees,
     paidAmountOfExamFees: data.paidAmountOfExamFees,
     dueOfTutionFees: data.dueOfTutionFees,
-    dueOfExamFees: data.dueOfExamFees
+    dueOfExamFees: data.dueOfExamFees,
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -86,7 +91,21 @@ function StudentHome() {
   const receipt = studentName + data.contactNumber.toString().substring(1, 5);
   const rollnumber = data.rollnumber;
   const handlePayButtonClickTution = () => {
-    const amountToPay = parseFloat(prompt("Enter the amount to pay:", "0"));
+    setShowDownload(true)
+    setShowCancel(false)
+    const paymentOptions = document.getElementsByName("payment");
+
+    // Iterate through the radio buttons to find the selected one
+    let selectedPayment;
+    for (const option of paymentOptions) {
+      if (option.checked) {
+        // The value of the selected radio button
+        selectedPayment = option.id;
+        break; // Exit the loop once we find the selected option
+      }
+    }
+    setPaymentMethod(selectedPayment)
+    const amountToPay = parseInt(document.getElementById("amt").value)
     studentDetails.paidAmountOfTutionFees = amountToPay
     studentDetails.dueOfTutionFees = totalAmount - amountToPay
     axios.patch(`http://localhost:8081/api/students/updatePayment/${data.rollnumber}`, studentDetails);
@@ -99,7 +118,21 @@ function StudentHome() {
     setBalance(totalAmount - amountToPay);
   };
   const handlePayButtonClickExam = () => {
-    const amountToPay = parseFloat(prompt("Enter the amount to pay:", "0"));
+    setShowCancel(false)
+    setShowDownload(true)
+    const paymentOptions = document.getElementsByName("payment");
+
+    // Iterate through the radio buttons to find the selected one
+    let selectedPayment;
+    for (const option of paymentOptions) {
+      if (option.checked) {
+        // The value of the selected radio button
+        selectedPayment = option.id;
+        break; // Exit the loop once we find the selected option
+      }
+    }
+    setPaymentMethod(selectedPayment)
+    const amountToPay = parseInt(document.getElementById("amtE").value)
     // setStudentDetails((prevState) => ({
     //   ...prevState,
     //   [paidAmountOfExamFees]: amountToPay,
@@ -144,6 +177,19 @@ function StudentHome() {
     }
   };
   const generateReceipt = () => {
+
+
+    const date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    // This arrangement can be altered based on how we want the date's format to appear.
+    let currentDate = `${day}-${month}-${year}`;
+
+
+
     axios.get(`http://localhost:8081/api/students/getStudent/${data.rollnumber}`).then((res) => {
 
       dataa = res.data
@@ -177,125 +223,205 @@ function StudentHome() {
       doc.text(`Due for tution fees : ${totalAmountE - amountPaidE}`, 20, 140);
     }
     doc.text(`Payment Status: paid`, 20, 150);
-    doc.text(`Paid Date: 2024-03-19`, 20, 160);
+    doc.text(`Paid Date: ${currentDate}`, 20, 160);
 
     // Save the PDF
     doc.save("Receipt.pdf");
     alert("Your receipt has been downloaded you can check that");
   };
+  const handleCancelT = () => {
+    setShowTutionFields(false);
+    setFeeType("")
+    setShowDownload(false)
+  }
+  const handleCancelE = () => {
+    setShowExamFields(false);
+    setFeeType("")
+    setShowDownload(false)
+  }
   return (
     <div className="hello">
       <h1>Hi {studentName}! Welcome to SV University Fees Portal</h1>
-      <table className="table table-striped">
-        <tr>
-          <td>Receipt No.</td>
-          <td>
-            <input type="text" value={receipt} />
-          </td>
-        </tr>
-        <tr>
-          <td>Student Name:</td>
-          <td>
-            <input type="text" value={studentDetails.studentName} />
-          </td>
-        </tr>
-        <tr>
-          <td>Roll Number:</td>
-          <td>
-            <input type="text" value={studentDetails.rollnumber} />
-          </td>
-        </tr>
-        <tr>
-          <td>Department:</td>
-          <td>
-            <input type="text" value={studentDetails.department} />
-          </td>
-        </tr>
-        <tr>
-          <td>Semester: </td>
-          <td>
+      <div className="who">
 
-            <select value={sem} onChange={handleSem}>
-              <option value="">Select Semester</option>
-              <option value="I">I</option>
-              <option value="II">II</option>
-              <option value="I">III</option>
-              <option value="II">IV</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>Address</td>
-          <td>
-            <input type="text" value={studentDetails.address} />
-          </td>
-          <td>
-            <select value={feeType} onChange={handleFeeTypeChange}>
-              <option value="">Select Fees Type</option>
-              <option value="Tution Fees">Tution Fees</option>
-              <option value="Exam Fees">Exam Fees</option>
-            </select>
+        <div className="tab">
+          <table className="table table-striped">
+            <tr>
+              <td>Receipt No.</td>
+              <td>
+                <input type="text" value={receipt} />
+              </td>
+            </tr>
+            <tr>
+              <td>Student Name:</td>
+              <td>
+                <input type="text" value={studentDetails.studentName} />
+              </td>
+            </tr>
+            <tr>
+              <td>Roll Number:</td>
+              <td>
+                <input type="text" value={studentDetails.rollnumber} />
+              </td>
+            </tr>
+            <tr>
+              <td>Department:</td>
+              <td>
+                <input type="text" value={studentDetails.department} />
+              </td>
+            </tr>
+            <tr>
+              <td>Semester: </td>
+              <td>
 
-            {showTutionFields && (
-              <div>
-                <h3>Tution Fees Details</h3>
-                <label>
-                  Total Amount to pay: <input type="text" value={totalAmount} />
-                </label>
-                <label>
-                  Paid amount: <input type="text" value={amountPaid} />
-                </label>
-                <label>
-                  Due: <input type="text" value={totalAmount - amountPaid} />
-                </label>
-                <button onClick={handlePayButtonClickTution}>Pay</button>
-                {paymentAmount > 0 && (
-                  <div>
-                    <h4>You have paid: {paymentAmount}</h4>
+                <select value={sem} onChange={handleSem}>
+                  <option value="">Select Semester</option>
+                  <option value="I">I</option>
+                  <option value="II">II</option>
+                  <option value="I">III</option>
+                  <option value="II">IV</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>
+                <input type="text" value={studentDetails.address} />
+              </td>
+            </tr>
+            <tr>
+              <td>Email Address:</td>
+              <td>
+                <input type="text" value={data.email} />
+              </td>
+            </tr>
+            <tr>
+              <td>Branch:</td>
+              <td>
+                <input type="text" value={data.branch} />
+              </td>
+            </tr>
+            <tr>
+              <td>Contact Number:</td>
+              <td>
+                <input type="text" value={data.contactNumber} />
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div className="pay">
+
+          <select value={feeType} onChange={handleFeeTypeChange}>
+            <option value="">Select Fees Type</option>
+            <option value="Tution Fees">Tution Fees</option>
+            <option value="Exam Fees">Exam Fees</option>
+          </select>
+
+          {showTutionFields && (
+            <div>
+              <div className='payment'>
+                <div className="det">
+                  <label for="tmt">Total amount:</label>
+                  <input type="text" value={totalAmount} />
+                </div>
+                <div className="det">
+                  <label for="pmt">Paid amount:</label>
+                  <input type="text" value={amountPaid} />
+                </div>
+                <div className="det">
+                  <label for="amt">Due:</label>
+                  <input type="text" value={totalAmount - amountPaid} />
+                </div>
+                <div className="det">
+                  <label for="amt">Enter amount:</label>
+                  <input id="amt" type="text" placeholder="Enter the amount" required />
+                </div>
+
+                <h3 className="heading">Select the payment option</h3>
+                <div className="radioBtns">
+                  <div className="radiol">
+                    <input type="radio" name="payment" id="phonepay" />
+                    <label for="phonepay">Phone Pay</label>
                   </div>
-                )}
+                  <div className="radiol">
+                    <input type="radio" name="payment" id="paytm" />
+                    <label for="paytm">Paytm</label>
+                  </div>
+                  <div className="radiol">
+                    <input type="radio" name="payment" id="googlepay" />
+                    <label for="googlepay">Google Pay</label>
+                  </div>
+                  <div className="radiol">
+                    <input type="radio" name="payment" id="netbanking" />
+                    <label for="netbanking">Net Banking</label>
+                  </div>
+                </div>
+                <div className="buttonss">
+                  {showCancel && <button onClick={handlePayButtonClickTution}>Continue to pay</button>}
+                  {showCancel && <button onClick={handleCancelT}>Cancel</button>}
+                </div>
               </div>
-            )}
+              {paymentAmount > 0 && (
+                <div>
+                  <h4>You have paid: {paymentAmount} through {paymentMethod}</h4>
+                </div>
+              )}
+            </div>
+          )}
 
-            {showExamFields && (
-              <div>
-                <h3>Exam Fees Details</h3>
-                <label>
-                  Total Amount to pay: <input type="text" value={totalAmountE} />
-                </label>
-                <label>
-                  Paid amount: <input type="text" value={amountPaidE} />
-                </label>
-                <label>
-                  Due: <input type="text" value={totalAmountE - amountPaidE} />
-                </label>
-                <button onClick={handlePayButtonClickExam}>Pay</button>
-                {paymentAmountExam > 0 && (
-                  <p className="output">You have paid: {paymentAmountExam}</p>
-                )}
+          {showExamFields && (
+            <div>
+              <h3>Exam Fees Details</h3>
+              <div className='payment'>
+                <div className="det">
+                  <label for="tmt">Total amount:</label>
+                  <input type="text" value={totalAmountE} />
+                </div>
+                <div className="det">
+                  <label for="pmt">Paid amount:</label>
+                  <input type="text" value={amountPaidE} />
+                </div>
+                <div className="det">
+                  <label for="amt">Due:</label>
+                  <input type="text" value={totalAmountE - amountPaidE} />
+                </div>
+                <div className="det">
+                  <label for="amt">Enter amount:</label>
+                  <input id="amtE" type="text" placeholder="Enter the amount" required />
+                </div>
+
+                <h3 className="heading">Select the payment option</h3>
+                <div className="radioBtns">
+                  <div className="radiol">
+                    <input type="radio" name="payment" id="phonepay" />
+                    <label for="phonepay">Phone Pay</label>
+                  </div>
+                  <div className="radiol">
+                    <input type="radio" name="payment" id="paytm" />
+                    <label for="paytm">Paytm</label>
+                  </div>
+                  <div className="radiol">
+                    <input type="radio" name="payment" id="googlepay" />
+                    <label for="googlepay">Google Pay</label>
+                  </div>
+                  <div className="radiol">
+                    <input type="radio" name="payment" id="netbanking" />
+                    <label for="netbanking">Net Banking</label>
+                  </div>
+                </div>
+                <div className="buttonss">
+                  {showCancel && <button onClick={handlePayButtonClickExam}>Continue to pay</button>}
+                  {showCancel && <button onClick={handleCancelE}>Cancel</button>}
+                </div>
               </div>
-            )}
-          </td>
-        </tr>
-        <tr>
-          <td>Email Address:</td>
-          <td>
-            <input type="text" value={data.email} />
-          </td>
-        </tr>
-        <tr>
-          <td>Branch:</td>
-          <td>
-            <input type="text" value={data.branch} />
-          </td>
-        </tr>
-        <tr>
-          <td>Contact Number:</td>
-          <td>
-            <input type="text" value={data.contactNumber} />
-          </td>
-        </tr>
-      </table>
+              {paymentAmountExam > 0 && (
+                <p className="output">You have paid: {paymentAmountExam} through {paymentMethod}</p>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+
       <button
         type="button"
         class="btn btn-primary edit"
@@ -440,9 +566,9 @@ function StudentHome() {
           </div>
         </div>
       </div>
-      <button class="btn btn-primary download" onClick={generateReceipt}>
+      {showDownload && <button class="btn btn-primary download" onClick={generateReceipt}>
         Download Receipt ( PDF )
-      </button>
+      </button>}
     </div>
   );
 }

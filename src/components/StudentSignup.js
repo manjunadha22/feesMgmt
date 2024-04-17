@@ -1,9 +1,14 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react'
 import { DeptContext } from './DeptContext';
+import validator from 'validator';
+import parse from 'html-react-parser';
+
 
 function StudentSignup() {
   const { dept, setDept } = useContext(DeptContext)
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showSubmit, SetShowSubmit] = useState(false)
   const [studentDetails, setStudentDetails] = useState({
     rollnumber: '',
     studentName: '',
@@ -15,8 +20,29 @@ function StudentSignup() {
     address: ''
   });
 
+  const validate = (value) => {
+    if (validator.isStrongPassword(value, {
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+    })) {
+      setErrorMessage('');
+      SetShowSubmit(true)
+    } else {
+      SetShowSubmit(false)
+      setErrorMessage(parse(`Your password must contain 8 characters <br> Your password mush have atleast one digit ('0' - '9') <br> Password must have atleast one uppercase letter ('A'-'Z') <br> Your password must have atlest one special character`));
+    }
+  };
+
   const handleChange = (e) => {
+
     const { name, value } = e.target;
+    console.log(name)
+    if (name === "password") {
+      validate(e.target.value)
+    }
     setStudentDetails(prevState => ({
       ...prevState,
       [name]: value
@@ -125,6 +151,10 @@ function StudentSignup() {
             required
           />
           <label htmlFor="password">Password</label>
+          <br />
+          {errorMessage === '' ? null : (
+            <span style={{ fontWeight: 'bold', color: 'red' }}>{errorMessage}</span>
+          )}
         </div>
         <div className="user-box">
           <input
@@ -150,7 +180,7 @@ function StudentSignup() {
           />
           <label htmlFor="address">Address</label>
         </div>
-        <button type="submit">Submit</button>
+        {showSubmit && <button type="submit">Submit</button>}
       </form>
     </div>
   )
