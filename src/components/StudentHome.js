@@ -5,6 +5,10 @@ import "./StudentHome.css";
 import axios from "axios";
 import jsPDF from "jspdf";
 import { DeptContext } from "./DeptContext";
+import useWindowSize from 'react-use/lib/useWindowSize';
+import Confetti from 'react-confetti';
+
+
 
 function StudentHome() {
   const navigate = useNavigate();
@@ -26,6 +30,8 @@ function StudentHome() {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [showDownload, setShowDownload] = useState(false)
   const [showCancel, setShowCancel] = useState(true)
+
+  const { width, height } = useWindowSize();
 
   const handleSem = (e) => {
     setSem(e.target.value)
@@ -419,6 +425,14 @@ function StudentHome() {
               )}
             </div>
           )}
+
+          {!showCancel && <Confetti
+            width="1200px"
+            height="820px"
+            numberOfPieces={200}
+            tweenDuration={5000}
+            colors={['#f44336', '#e91e63', '#9c27b0', /* ... */]}
+          />}
         </div>
       </div>
 

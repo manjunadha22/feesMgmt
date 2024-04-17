@@ -54,6 +54,7 @@ h4 {
 }
         .payment {
             margin-left: 150px;
+            margin-bottom: 50px;
             display: flex;
             flex-direction: column;
             margin-top: 40px;
